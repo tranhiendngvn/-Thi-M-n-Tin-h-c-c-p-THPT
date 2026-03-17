@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Đề kiểm tra Tin học 12</title>
+
+<style>
+body{font-family:Arial;background:#f4f6f8;padding:20px}
+.container{max-width:900px;margin:auto;background:white;padding:25px;border-radius:10px}
+.question{margin-bottom:15px;border-bottom:1px solid #ddd;padding:10px}
+.timer{color:red;font-size:20px;text-align:right}
+button{padding:12px 25px;background:#2b7cff;color:white;border:none;border-radius:6px;font-size:18px}
+.result{font-size:24px;color:green;text-align:center;margin-top:20px}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>ĐỀ KIỂM TRA GIỮA KÌ II - TIN HỌC 12</h2>
+<div class="timer">Thời gian: <span id="time">45:00</span></div>
+
+<form id="quiz">
+
+<h3>PHẦN I: TRẮC NGHIỆM (6 điểm)</h3>
+
+<!-- 24 câu -->
+<script>
+const questions = [
+"Phần tử nào sau đây được dùng để khai báo internal CSS?",
+"Khai báo nào sau đây được dùng để áp dụng CSS từ tệp main.css?",
+"Khai báo định dạng nào đúng cú pháp?",
+"Có bao nhiêu lỗi trong đoạn CSS?",
+"Khai báo CSS nào đúng cú pháp?",
+"Khai báo CSS nào đúng cú pháp?",
+"Khai báo HTML nào áp dụng CSS a.xanh?",
+"Khai báo siêu liên kết đúng?",
+"Bộ chọn lớp là gì?",
+"Phần tử hiển thị dạng khối?",
+"Phần tử nhóm nội dung?",
+"Tổng chiều rộng box model?",
+"Thuộc tính khoảng cách trong border?",
+"Thanh điều hướng dùng để?",
+"Phát biểu sai về bố cục?",
+"CSS viết tắt của?",
+"Thuộc tính đổi màu nền?",
+"Bộ chọn lớp dùng để?",
+"Tên lớp bắt đầu bằng?",
+"Mô hình hộp dùng để?",
+"Khoảng cách ngoài phần tử?",
+"Bước đầu tạo web?",
+"Sau khi chọn theme?",
+"Chức năng Preview?"
+];
+
+for(let i=0;i<24;i++){
+document.write(`<div class="question">
+<b>Câu ${i+1}:</b> ${questions[i]}<br>
+<label><input type="radio" name="q${i}"> A</label><br>
+<label><input type="radio" name="q${i}"> B</label><br>
+<label><input type="radio" name="q${i}" value="correct"> C</label><br>
+<label><input type="radio" name="q${i}"> D</label>
+</div>`);
+}
+</script>
+
+<h3>PHẦN II: ĐÚNG / SAI (4 điểm)</h3>
+
+<div class="question">
+Câu 1 (CSS)<br>
+<label><input type="checkbox" class="cau1" data-correct="true"> a</label><br>
+<label><input type="checkbox" class="cau1" data-correct="true"> b</label><br>
+<label><input type="checkbox" class="cau1" data-correct="true"> c</label><br>
+<label><input type="checkbox" class="cau1"> d</label>
+</div>
+
+<div class="question">
+Câu 2 (Box model)<br>
+<label><input type="checkbox" class="cau2" data-correct="true"> a</label><br>
+<label><input type="checkbox" class="cau2" data-correct="true"> b</label><br>
+<label><input type="checkbox" class="cau2"> c</label><br>
+<label><input type="checkbox" class="cau2" data-correct="true"> d</label>
+</div>
+
+<div class="question">
+Câu 3 (Selector)<br>
+<label><input type="checkbox" class="cau3" data-correct="true"> a</label><br>
+<label><input type="checkbox" class="cau3"> b</label><br>
+<label><input type="checkbox" class="cau3" data-correct="true"> c</label><br>
+<label><input type="checkbox" class="cau3" data-correct="true"> d</label>
+</div>
+
+<div class="question">
+Câu 4 (Display)<br>
+<label><input type="checkbox" class="cau4" data-correct="true"> a</label><br>
+<label><input type="checkbox" class="cau4" data-correct="true"> b</label><br>
+<label><input type="checkbox" class="cau4"> c</label><br>
+<label><input type="checkbox" class="cau4" data-correct="true"> d</label>
+</div>
+
+<br>
+<button type="button" onclick="submitTest()">Nộp bài</button>
+
+</form>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<script>
+
+let time=45*60;
+setInterval(()=>{
+let m=Math.floor(time/60);
+let s=time%60;
+document.getElementById("time").innerHTML=m+":"+(s<10?"0":"")+s;
+time--;
+if(time<0) submitTest();
+},1000);
+
+function submitTest(){
+
+let score=0;
+
+// trắc nghiệm
+for(let i=0;i<24;i++){
+let q=document.querySelector(`input[name="q${i}"]:checked`);
+if(q && q.value==="correct") score+=0.25;
+}
+
+// đúng sai
+for(let i=1;i<=4;i++){
+
+let correct=document.querySelectorAll(`.cau${i}[data-correct="true"]`);
+let checked=document.querySelectorAll(`.cau${i}:checked`);
+
+let count=0;
+correct.forEach(cb=>{if(cb.checked) count++;});
+
+let wrong=false;
+checked.forEach(cb=>{if(!cb.dataset.correct) wrong=true;});
+
+if(!wrong){
+if(count==1) score+=0.1;
+if(count==2) score+=0.25;
+if(count==3) score+=0.5;
+if(count==4) score+=1;
+}
+
+}
+
+document.getElementById("result").innerHTML="Điểm: "+score.toFixed(2);
+
+}
+
+</script>
+
+</body>
+</html>
