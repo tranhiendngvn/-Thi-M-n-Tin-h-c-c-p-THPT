@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Thi trắc nghiệm Tin học 12</title>
+
+<style>
+
+body{
+font-family: Arial;
+max-width:900px;
+margin:auto;
+}
+
+.question{
+margin-bottom:20px;
+padding:10px;
+border:1px solid #ddd;
+}
+
+h1{
+text-align:center;
+}
+
+button{
+font-size:18px;
+padding:10px 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>ĐỀ KIỂM TRA TIN HỌC 12</h1>
+
+<h2>PHẦN I: TRẮC NGHIỆM</h2>
+
+<div class="question">
+<p>1. Phần tử nào dùng để khai báo internal CSS?</p>
+<label><input type="radio" name="q1" value="A">A link</label><br>
+<label><input type="radio" name="q1" value="B">B base</label><br>
+<label><input type="radio" name="q1" value="C">C style</label><br>
+<label><input type="radio" name="q1" value="D">D meta</label>
+</div>
+
+<div class="question">
+<p>2. Khai báo nào dùng để liên kết CSS?</p>
+<label><input type="radio" name="q2" value="A">A</label><br>
+<label><input type="radio" name="q2" value="B">B</label><br>
+<label><input type="radio" name="q2" value="C">C</label><br>
+<label><input type="radio" name="q2" value="D">D</label>
+</div>
+
+<div class="question">
+<p>3. CSS là viết tắt của?</p>
+<label><input type="radio" name="q16" value="A">A Cascading Style Sheets</label><br>
+<label><input type="radio" name="q16" value="B">B Computer Style Sheet</label><br>
+<label><input type="radio" name="q16" value="C">C Creative Style Sheet</label><br>
+<label><input type="radio" name="q16" value="D">D Colorful Style Sheet</label>
+</div>
+
+<h2>PHẦN II: ĐÚNG / SAI</h2>
+
+<div class="question">
+
+<p>CSS có thể lưu trong file .css</p>
+
+<label><input type="radio" name="tf1" value="true">Đúng</label>
+<label><input type="radio" name="tf1" value="false">Sai</label>
+
+</div>
+
+<div class="question">
+
+<p>External CSS cần khai báo trong HTML</p>
+
+<label><input type="radio" name="tf2" value="true">Đúng</label>
+<label><input type="radio" name="tf2" value="false">Sai</label>
+
+</div>
+
+<br>
+
+<button onclick="submitExam()">Nộp bài</button>
+
+<h2 id="result"></h2>
+
+<script>
+
+function submitExam(){
+
+let score = 0
+
+let answers = {
+
+q1:"C",
+q2:"C",
+q16:"A",
+tf1:"true",
+tf2:"true"
+
+}
+
+for(let q in answers){
+
+let selected = document.querySelector('input[name="'+q+'"]:checked')
+
+if(selected){
+
+if(selected.value == answers[q]){
+
+score++
+
+}
+
+}
+
+}
+
+document.getElementById("result").innerHTML =
+"Điểm của bạn: " + score
+
+}
+
+</script>
+
+</body>
+</html>
